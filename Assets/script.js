@@ -96,8 +96,33 @@ function endQuiz() {
   questionElement.textContent = "Your score is " + score + " out of 4, with " + endTime + " seconds left. Enter your initials and click submit to save your score!";
 };
 
+function displayHighscore() {
+  const storedHighScore = localStorage.getItem("HighScore");
+  if (storedHighScore) {
+    highScore = parseINt(storedHighScore);
+  } 
+
+  const highScoreElement = document.getElementById("high-score");
+  highScoreElement.textContent = highScore.toString();
+}
+
 function saveScore() {
   var initials = textboxElement.value;
   leaderboard.push(["user: " + initials, "score: " + score, "time left: " + endTime]);
   console.log(leaderboard);
+}
+
+var highScore = 
+function renderLastScore(){
+  var lastScore = JSON.parse(localStorage.getItem("lastScore"));
+
+  if(lastScore !== null) {
+    document.getElementById().innerHTML = "";
+    document.getElementById().innerHTML = "";
+    document.getElementById().innerHTML = "";
+    document.getElementById().innerHTML = "";
+
+  } else {
+    return;
+  }
 }
