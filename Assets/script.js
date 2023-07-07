@@ -1,5 +1,5 @@
 const timerElement = document.getElementById("timer");
-const leaderboard = [];
+const leaderboards = [];
 const quizQuestions = [
 {
   question: "question 1",
@@ -25,7 +25,7 @@ const quizQuestions = [
 
 let currentQuestionIndex = 0;
 let score = 0;
-let timeLeft = 60;
+let timeLeft = 100;
 let timerInterval;
 var endTime;
 
@@ -44,12 +44,16 @@ textboxElement.style.display = "none";
 function startButtonClicked() {
   setQuestion();
   startElement.style.display = "none";
-  timerInterval = setInterval(updateTimer, 1175);
+  timerInterval = setInterval(updateTimer, 1000);
+  displayHighscore();
 };
 
 function updateTimer() {
   timeLeft--;
   timerElement.textContent = timeLeft;
+  if (timeLeft <= 0) {
+    endQuiz();
+  }
 };
 
 function setQuestion() {
@@ -75,7 +79,7 @@ function checkAnswer(answerIndex) {
   if (answerIndex === currentQuestion.answer) {
     score++;
   } else {
-    timeLeft -= 10;
+    timeLeft -= 25;
   }
 
   currentQuestionIndex++;
@@ -83,46 +87,42 @@ function checkAnswer(answerIndex) {
   if (currentQuestionIndex < quizQuestions.length) {
     setQuestion();
   } else {
-    endQuiz();
+      endQuiz();
   }
+  saveScore();
 };
 
 function endQuiz() {
+  clearInterval(timerInterval);
   endTime = timeLeft;
   timerElement.style.display = "none";
   optionsElement.style.display = "none";
   textboxElement.style.display = "block";
   submitElement.style.display = "block";
-  questionElement.textContent = "Your score is " + score + " out of 4, with " + endTime + " seconds left. Enter your initials and click submit to save your score!";
+  questionElement.textContent = "Your score is " + score + " out of 100, with " + endTime + " seconds left. Enter your initials and click submit to save your score!";
+  localStorage.setItem("leaderboards", score.toString());
 };
 
+submitElement.addEventListener("click", saveScore);
+
 function displayHighscore() {
-  const storedHighScore = localStorage.getItem("HighScore");
+  const storedHighScore = localStorage.getItem("highScore");
   if (storedHighScore) {
-    highScore = parseINt(storedHighScore);
+    score = parseInt(storedHighScore);
   } 
 
   const highScoreElement = document.getElementById("high-score");
-  highScoreElement.textContent = highScore.toString();
+  highScoreElement.textContent = score.toString();
 }
 
 function saveScore() {
   var initials = textboxElement.value;
-  leaderboard.push(["user: " + initials, "score: " + score, "time left: " + endTime]);
-  console.log(leaderboard);
-}
-
-var highScore = 
-function renderLastScore(){
-  var lastScore = JSON.parse(localStorage.getItem("lastScore"));
-
-  if(lastScore !== null) {
-    document.getElementById().innerHTML = "";
-    document.getElementById().innerHTML = "";
-    document.getElementById().innerHTML = "";
-    document.getElementById().innerHTML = "";
-
-  } else {
-    return;
+  leaderboards.push(["user: " + initials, "score: " + score, "time left: " + endTime]);
+  console.log(leaderboards);
+  console.log('Score:', timeLeft)
+  if (timeLeft > score) {
+    score = timeLeft;
+    console.log("New High Score: ", score);
   }
-}
+  localStorage.setItem("highscore", JSON.stringify(leaderboards));
+};
