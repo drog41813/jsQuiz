@@ -149,7 +149,7 @@ function listHighScores() {
       var highScores = leaderboards[i];
       var li = document.createElement("li");
       li.textContent = highScores.Initials + " your score is " + highScores.Score + " out of 4";
-      leaderBoard.appendChild(li);
+      leaderboards.appendChild(li);
   }
 }
 
