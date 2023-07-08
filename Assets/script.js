@@ -132,6 +132,7 @@ function init() {
 // function will save score
 function saveScore() {
   var initials = textboxElement.value;
+  var initials = initials.toUpperCase();
   var totalScore = {
     Initials: initials,
     Score: score,
