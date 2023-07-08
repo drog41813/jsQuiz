@@ -49,3 +49,48 @@ body{
     background-color: aliceblue;
     transition: .3s ease-in;
 }
+
+#initials {
+    position: absolute;
+    left: 100px;
+}
+
+#submit-button{
+    position: absolute;
+    left: 100px;
+    bottom: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+#leaderboard{
+    text-align: center;
+    align-items: center;
+    padding: 155px;
+    width:500px;
+    height:150px;
+    border-style: solid;
+    border-radius: 30px black;
+    position: absolute;
+    left: 28%;
+    top:10%;
+    background-color: white;
+    box-shadow: 3px 3px gray;
+}
+
+#gameStart{
+    text-decoration: none;
+    color:black;
+    font-weight: 900;
+    border-style: solid;
+    border-radius: 6px black;
+    border-width: 2px;
+}
